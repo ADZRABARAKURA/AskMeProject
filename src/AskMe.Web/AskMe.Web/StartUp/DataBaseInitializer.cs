@@ -29,7 +29,6 @@ internal sealed class DatabaseInitializer : IAsyncInitializer
     private async Task UpdateRolesAsync()
     {
         var roles = await roleManager.Roles.ToListAsync();
-        Console.WriteLine("hello world");
     }
 
     private async Task AddDefaultRolesAsync()

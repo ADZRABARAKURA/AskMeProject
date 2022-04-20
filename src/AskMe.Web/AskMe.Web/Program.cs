@@ -1,5 +1,4 @@
 using AskMe.Domain.Users.Entities;
-using AskMe.Infrastructure.Abstractions.Interfaces;
 using AskMe.Infrastructure.DataAccess;
 using AskMe.UseCases.User.CreateUser;
 using AskMe.Web.StartUp;
@@ -7,7 +6,6 @@ using AskMe.Web.Web;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
