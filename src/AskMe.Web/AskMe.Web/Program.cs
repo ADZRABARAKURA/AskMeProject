@@ -1,4 +1,4 @@
-using AskMe.Domain.Entities.User;
+using AskMe.Domain.Users.Entities;
 using AskMe.Infrastructure.Abstractions.Interfaces;
 using AskMe.Infrastructure.DataAccess;
 using AskMe.UseCases.User.CreateUser;
@@ -37,7 +37,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 var configuration = builder.Configuration;
 builder.Services.AddDbContext<AppDbContext>(new DatabaseOptionsSetup(configuration.GetConnectionString("AskMeDb")).Setup);
-builder.Services.AddAsyncInitializer<DatabaseInitializer>();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -49,6 +48,16 @@ builder.Services.AddSwaggerGen(c =>
 AskMe.Web.DI.ApplicationServices.Register(builder.Services);
 
 var app = builder.Build();
+
+#region InitializeDatabase
+using (var scope = app.Services.CreateScope())
+using (var appDbContext = scope.ServiceProvider.GetService<AppDbContext>())
+using (var roleManager = scope.ServiceProvider.GetService<RoleManager<ApplicationRole>>())
+{
+    var dbInitializer = new DatabaseInitializer(appDbContext, roleManager);
+    await dbInitializer.InitializeAsync();
+}
+#endregion
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

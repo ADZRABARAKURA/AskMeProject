@@ -5,17 +5,20 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AskMe.Web", "AskMe.Web\AskMe.Web.csproj", "{E068DB82-E586-4797-B074-C734733351DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AskMe.Infrastructure.Abstractions", "AskMe.Infrastructure.Abstractions\AskMe.Infrastructure.Abstractions.csproj", "{C273D3CA-9186-41BD-8D69-5EAB61DC3277}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AskMe.Infrastructure.Abstractions", "AskMe.Infrastructure.Abstractions\AskMe.Infrastructure.Abstractions.csproj", "{C273D3CA-9186-41BD-8D69-5EAB61DC3277}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AskMe.Infrastructure.DataAccess", "AskMe.Infrastructure.DataAccess\AskMe.Infrastructure.DataAccess.csproj", "{5C37B9C5-99DA-4832-8C0F-A231CDB987A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AskMe.Infrastructure.DataAccess", "AskMe.Infrastructure.DataAccess\AskMe.Infrastructure.DataAccess.csproj", "{5C37B9C5-99DA-4832-8C0F-A231CDB987A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AskMe.UseCases", "AskMe.UseCases\AskMe.UseCases.csproj", "{3C738F30-66A5-4F2A-BDE6-D46051071D22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AskMe.UseCases", "AskMe.UseCases\AskMe.UseCases.csproj", "{3C738F30-66A5-4F2A-BDE6-D46051071D22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AskMe.Domain", "AskMe.Domain\AskMe.Domain.csproj", "{8C2DEBCB-ED46-4A55-B932-3D8CA31A52A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AskMe.Domain", "AskMe.Domain\AskMe.Domain.csproj", "{8C2DEBCB-ED46-4A55-B932-3D8CA31A52A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AskMe.DomainServices", "AskMe.DomainServices\AskMe.DomainServices.csproj", "{279E8C7D-EACC-48FB-826A-A50C69DC7BEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AskMe.DomainServices", "AskMe.DomainServices\AskMe.DomainServices.csproj", "{279E8C7D-EACC-48FB-826A-A50C69DC7BEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AskMe.UseCases.Common", "AskMe.UseCases.Common\AskMe.UseCases.Common.csproj", "{4962C9EF-D2F8-4242-B022-D21E8AB0A36D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AskMe.UseCases.Common", "AskMe.UseCases.Common\AskMe.UseCases.Common.csproj", "{4962C9EF-D2F8-4242-B022-D21E8AB0A36D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C2DEBCB-ED46-4A55-B932-3D8CA31A52A9} = {8C2DEBCB-ED46-4A55-B932-3D8CA31A52A9}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

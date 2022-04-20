@@ -1,26 +1,16 @@
-﻿using AskMe.Domain.Entities.User;
+﻿using AskMe.Domain.Users.Entities;
 using AskMe.Infrastructure.DataAccess;
 using Extensions.Hosting.AsyncInitialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace AskMe.Web.StartUp;
 
-/// <summary>
-/// Contains database migration helper methods.
-/// </summary>
 internal sealed class DatabaseInitializer : IAsyncInitializer
 {
     private readonly AppDbContext appDbContext;
     private readonly RoleManager<ApplicationRole> roleManager;
 
-    /// <summary>
-    /// Database initializer. Performs migration and data seed.
-    /// </summary>
-    /// <param name="appDbContext">Data context.</param>
-    /// <param name="roleManager">Role manager.</param>
-    /// <param name="roleService">Role service.</param>
     public DatabaseInitializer(AppDbContext appDbContext,
         RoleManager<ApplicationRole> roleManager)
     {
@@ -28,7 +18,6 @@ internal sealed class DatabaseInitializer : IAsyncInitializer
         this.roleManager = roleManager;
     }
 
-    /// <inheritdoc />
     public async Task InitializeAsync()
     {
         await appDbContext.Database.EnsureCreatedAsync();
@@ -40,6 +29,7 @@ internal sealed class DatabaseInitializer : IAsyncInitializer
     private async Task UpdateRolesAsync()
     {
         var roles = await roleManager.Roles.ToListAsync();
+        Console.WriteLine("hello world");
     }
 
     private async Task AddDefaultRolesAsync()

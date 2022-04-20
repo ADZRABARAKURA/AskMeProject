@@ -1,4 +1,4 @@
-﻿using AskMe.Domain.Entities.User;
+﻿using AskMe.Domain.Users.Entities;
 using AskMe.DomainServices.Exceptions;
 using AskMe.Infrastructure.Abstractions.Interfaces;
 using MediatR;

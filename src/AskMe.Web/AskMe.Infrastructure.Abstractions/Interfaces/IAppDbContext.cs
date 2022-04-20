@@ -1,5 +1,5 @@
-﻿using AskMe.Domain.Entities.Post;
-using AskMe.Domain.Entities.User;
+﻿using AskMe.Domain.Posts.Entities;
+using AskMe.Domain.Users.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AskMe.Infrastructure.Abstractions.Interfaces;

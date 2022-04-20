@@ -1,5 +1,5 @@
-﻿using AskMe.Domain.Entities.Post;
-using AskMe.Domain.Entities.User;
+﻿using AskMe.Domain.Posts.Entities;
+using AskMe.Domain.Users.Entities;
 using AskMe.Infrastructure.Abstractions.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,6 @@ public class AppDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, 
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
-        Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

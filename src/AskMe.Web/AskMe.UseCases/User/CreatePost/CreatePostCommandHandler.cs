@@ -1,4 +1,4 @@
-﻿using AskMe.Domain.Entities.Post;
+﻿using AskMe.Domain.Posts.Entities;
 using AskMe.Infrastructure.Abstractions.Interfaces;
 using MediatR;
 
