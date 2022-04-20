@@ -24,7 +24,7 @@ public class CreateUserCommandHandler : AsyncRequestHandler<CreateUserCommand>
 
     protected override async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        if (loggedUserAccessor.GetCurrentUserId() != default)
+        if (loggedUserAccessor.GetCurrentUserId() != null)
         {
             throw new ValidationException("Logged user can not register new account.");
         }

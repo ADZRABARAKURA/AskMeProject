@@ -2,5 +2,5 @@
 
 public interface ILoggedUserAccessor
 {
-    int GetCurrentUserId();
+    int? GetCurrentUserId();
 }

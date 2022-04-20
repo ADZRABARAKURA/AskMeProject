@@ -2,6 +2,7 @@ using AskMe.Domain.Entities.User;
 using AskMe.Infrastructure.Abstractions.Interfaces;
 using AskMe.Infrastructure.DataAccess;
 using AskMe.UseCases.User.CreateUser;
+using AskMe.Web.StartUp;
 using AskMe.Web.Web;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -25,22 +26,18 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
                 options.Cookie.Name = "AskMe.AuthCookie";
             });
 builder.Services.AddMediatR(typeof(CreateUserCommand).Assembly);
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddSingleton<IJsonHelper, SystemTextJsonHelper>();
-builder.Services.AddScoped<IAppDbContext, AppDbContext>();
-builder.Services.AddScoped<ILoggedUserAccessor, LoggedUserAccessor>();
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
+builder.Services.Configure<IdentityOptions>(new IdentityOptionsSetup().Setup);
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = $"/auth/login";
     options.LogoutPath = $"/auth/logout";
 });
 var configuration = builder.Configuration;
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(
-            configuration.GetConnectionString("AskMeDb"),
-            sqlOptions => sqlOptions.MigrationsAssembly(typeof(AppDbContext).Assembly.GetName().Name)));
+builder.Services.AddDbContext<AppDbContext>(new DatabaseOptionsSetup(configuration.GetConnectionString("AskMeDb")).Setup);
+builder.Services.AddAsyncInitializer<DatabaseInitializer>();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -49,6 +46,7 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1"
     });
 });
+AskMe.Web.DI.ApplicationServices.Register(builder.Services);
 
 var app = builder.Build();
 

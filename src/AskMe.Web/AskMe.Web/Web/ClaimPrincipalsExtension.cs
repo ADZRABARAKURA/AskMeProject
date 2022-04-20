@@ -23,6 +23,6 @@ public static class ClaimPrincipalExtensions
             return userId;
         }
 
-        throw new InvalidOperationException("Cannot get current logged user identifier.");
+        return default;
     }
 }

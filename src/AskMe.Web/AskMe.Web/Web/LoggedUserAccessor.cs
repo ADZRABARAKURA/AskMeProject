@@ -11,13 +11,14 @@ public class LoggedUserAccessor : ILoggedUserAccessor
         this.httpContextAccessor = httpContextAccessor;
     }
 
-    public int GetCurrentUserId()
+    public int? GetCurrentUserId()
     {
         if (httpContextAccessor.HttpContext == null)
         {
             throw new InvalidOperationException("There is no active HTTP context specified.");
         }
 
-        return httpContextAccessor.HttpContext.User.GetCurrentUserId();
+        var userId = httpContextAccessor.HttpContext.User.GetCurrentUserId();
+        return userId == default ? null : userId;
     }
 }

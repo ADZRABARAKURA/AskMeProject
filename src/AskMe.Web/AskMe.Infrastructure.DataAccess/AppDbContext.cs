@@ -8,11 +8,12 @@ namespace AskMe.Infrastructure.DataAccess;
 
 public class AppDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>, IAppDbContext
 {
+    public DbSet<Post> Posts { get; protected set; }
+
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
+        Database.EnsureCreated();
     }
-
-    public DbSet<Post> Posts { get; protected set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
