@@ -4,25 +4,25 @@ namespace AskMe.Web.Web;
 
 public static class ClaimPrincipalExtensions
 {
-    public static bool TryGetCurrentUserId(this ClaimsPrincipal principal, out int userId)
+    public static bool TryGetCurrentUserId(this ClaimsPrincipal principal, out Guid userId)
     {
         var currentUserId = principal.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!string.IsNullOrEmpty(currentUserId))
         {
-            userId = int.Parse(currentUserId);
+            userId = Guid.Parse(currentUserId);
             return true;
         }
-        userId = -1;
+        userId = Guid.Empty;
         return false;
     }
 
-    public static int GetCurrentUserId(this ClaimsPrincipal principal)
+    public static Guid GetCurrentUserId(this ClaimsPrincipal principal)
     {
-        if (TryGetCurrentUserId(principal, out int userId))
+        if (TryGetCurrentUserId(principal, out Guid userId))
         {
             return userId;
         }
 
-        return default;
+        return Guid.Empty;
     }
 }

@@ -11,7 +11,7 @@ public class LoggedUserAccessor : ILoggedUserAccessor
         this.httpContextAccessor = httpContextAccessor;
     }
 
-    public int? GetCurrentUserId()
+    public Guid? GetCurrentUserId()
     {
         if (httpContextAccessor.HttpContext == null)
         {
