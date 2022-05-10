@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 body {
     font-family: Roboto;
     font-size: 16px;
@@ -49,9 +53,71 @@ header {
 }
 .header__signin {
     margin-right: 40px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #FFFFFF;
 }
 .header__signup {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #FFFFFF;
     padding: 12px 24px;
     margin-right: 60px;
     background: linear-gradient(90deg, rgba(195, 0, 109, 0.9) 5%, rgba(115, 0, 64, 0.9) 100%);
+}
+
+/* ==================== */
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-top: 108px;
+}
+
+.ask {
+    display: flex;
+    
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    /* max-width: 450px; */
+    align-items: center;
+    flex: 0 1 50%;
+}
+.left__title {
+    margin-bottom: 9px;
+}
+.left__text {
+    text-align: center;
+    margin-bottom: 48px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+    color: #C0C0C0;
+}
+.left__btn {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    color: #FFFFFF;
+    padding: 20px 40px;
+    border: 3px solid #B00062;
+}
+.right {
+    flex: 0 1 50%;
+    text-align: center;
 }
