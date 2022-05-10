@@ -121,3 +121,52 @@ header {
     flex: 0 1 50%;
     text-align: center;
 }
+
+/* ======================= */
+
+
+.service {
+    background: #181818;
+    display: flex;
+    max-height: 480px;
+}
+.service__img {
+    flex: 0 1 50%;
+}
+
+.service__img img {
+    position: relative;
+    left: 0;
+    top: -60px;
+}
+.service__right {
+    flex: 0 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.service__title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 36px;
+}
+
+.service__title span {
+    color: #F10086;
+
+}
+.service__points {
+    margin-right: auto;
+    padding-left: 60px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 140.69%;
+    color: #C0C0C0;
+
+}
