@@ -140,6 +140,7 @@ header {
     top: -60px;
 }
 .service__right {
+    padding-right: 80px;
     flex: 0 1 50%;
     display: flex;
     justify-content: center;
@@ -221,4 +222,69 @@ header {
     padding: 26px 32px;
     background: linear-gradient(180deg, #181818 49.27%, rgba(24, 24, 24, 0.2) 100%);
 
+}
+
+
+/* ==================================== */
+
+
+.footer {
+    background: #181818;
+    padding: 100px;
+    position: relative;
+}
+.container {
+}
+.footer__body {
+    display: flex;
+}
+.footer__left {
+    flex: 0 1 50%;
+}
+.footer__left ul {
+    list-style: none;
+    padding: 15px;
+    border-right: 2px solid #B00062;
+}
+.footer__left ul li {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    text-decoration-line: underline;
+    color: #C0C0C0;
+}
+.footer__left ul li:not(:last-child) {
+    margin-bottom: 20px;
+}
+.footer__right {
+    flex: 0 1 50%;
+    padding-left: 100px;
+}
+.footer__img img {
+    width: 100px;
+    height: 50px;
+}
+.footer__mail {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #C0C0C0;
+}
+.footer__tel {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #C0C0C0;
+}
+
+.man {
+    position: absolute;
+    left: 82%;
+    top: 5px;
 }
