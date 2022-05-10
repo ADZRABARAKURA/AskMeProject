@@ -3,10 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>React App</title>
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    <title>AskMe</title>
+
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <!-- <div id="root"></div> -->
+    
+    <div class="wrapper">
+      <header class="header">
+        <img src="img/search.svg" alt="" class="header__icon">
+        <input type="text" class="header__input" placeholder="Поиск автора">
+        <div class="header__signin">Войти</div>
+        <div class="header__signup">Зарегистрироваться</div>
+      </header>
+    </div>
   </body>
 </html>
