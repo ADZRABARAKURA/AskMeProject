@@ -2,6 +2,19 @@ import React, { Component } from 'react'
 import './Auth.css'
 
 export default class Test extends Component {
+
+  onAuthClick(event) {
+    event.target.classList.add('active-btn');
+    event.target.previousElementSibling.classList.remove('active-btn');
+    document.querySelector('.left-reg__login').classList.add('hide');
+  }
+
+  onRegClick(event) {
+    event.target.classList.add('active-btn');
+    event.target.nextElementSibling.classList.remove('active-btn');
+    document.querySelector('.left-reg__login').classList.remove('hide');
+  }
+
   render() {
     return (
           <div className="wrapper">
@@ -10,8 +23,8 @@ export default class Test extends Component {
               <div className="reg">
                 <div className="reg__left left-reg">
                   <div className="left-reg__choose">
-                    <div className="left-reg__registation">Регистрация</div>
-                    <div className="left-reg__auth">Авторизация</div>
+                    <div className="left-reg__registation active-btn" onClick={(e) => this.onRegClick(e)}>Регистрация</div>
+                    <div className="left-reg__auth" onClick={(e) => this.onAuthClick(e)}>Авторизация</div>
                   </div>
                   <div className="left-reg__welcome">Добро пожаловать</div>
                   <div className="left-reg__text">Введите адрес электронной почты, придумайте логин и пароль</div>
