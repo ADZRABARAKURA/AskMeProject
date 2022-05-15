@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+body {
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #141414;
+}
+
+.wrapper {
+    min-height: 100%;
+    overflow: hidden;
+}
+ 
+ul {
+    list-style: none;
+}
+
+
+/* ============== Settings ================= */
+
+.settings {
+}
+.settings__container {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;;
+    gap: 20px;
+}
+.settings__body {
+    min-height: 600px;
+    background: #272727;
+    padding: 16px;
+    flex-basis: 600px;
+}
+.settings__btn {
+    margin-bottom: 30px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: #B00062;
+}
+.settings__form {
+    
+}
+.settings__item {
+    max-width: 356px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #202020;
+    padding: 10px;
+}
+.settings__label {
+    margin-bottom: 5px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #C0C0C0;
+}
+.settings__name {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #FFFFFF;
+    background: #202020;
+    border: 0;
+}
+.settings__email {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: white;
+    background: #202020;
+    border: 0;
+}
+.settings__menu {
+    background: #272727
+}
+.menu-settings {
+    flex-basis: 200px;
+}
+.menu-settings__title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #FFFFFF;
+    padding: 12px 24px;
+}
+.menu-settings__list ul li{
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    background: #272727;
+    padding: 12px 24px;
+}
+
+.menu-settings__list ul li.selected {
+    background: #B00062;
+}
