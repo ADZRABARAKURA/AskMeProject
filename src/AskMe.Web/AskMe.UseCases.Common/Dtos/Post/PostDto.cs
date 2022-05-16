@@ -19,4 +19,9 @@ public record PostDto
 
     /// <inheritdoc cref="Domain.Posts.Entities.Post.AuthorName"/>
     public string AuthorName { get; init; }
+
+    /// <summary>
+    /// ID of author.
+    /// </summary>
+    public Guid? AuthorID { get; init; }
 }

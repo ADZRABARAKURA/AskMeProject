@@ -1,6 +1,10 @@
 ﻿using AskMe.UseCases.Common.Dtos.Post;
 using AskMe.UseCases.User.CreatePost;
+using AskMe.UseCases.User.GetPostsByUserId;
+using AskMe.UseCases.User.GetPostsCreatedByUser;
+using AskMe.Web.Identity;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AskMe.Web.Controllers;
@@ -16,11 +20,27 @@ public class PostController : ControllerBase
         this.mediator = mediator;
     }
 
-    [HttpPost("create")]
+    [HttpPost("")]
     public async Task Register([FromForm] PostDto post, CancellationToken cancellationToken)
     {
         var command = new CreatePostCommand(post);
         await mediator.Send(command, cancellationToken);
+    }
+
+    [HttpGet("{id}")]
+    [Authorize(Roles = ExistingRoles.Streamer)]
+    public async Task<IEnumerable<PostDto>> GetUserPosts([FromQuery]Guid id, CancellationToken cancellationToken)
+    {
+        var command = new GetPostsByUserIdCommand(id);
+        return await mediator.Send(command, cancellationToken);
+    }
+
+    [HttpGet("history/{id}")]
+    [Authorize]
+    public async Task<IEnumerable<PostDto>> GetPostsCreatedByUser([FromQuery] Guid id, CancellationToken cancellationToken)
+    {
+        var command = new GetPostsCreatedByUserCommand(id);
+        return await mediator.Send(command, cancellationToken);
     }
 }
 

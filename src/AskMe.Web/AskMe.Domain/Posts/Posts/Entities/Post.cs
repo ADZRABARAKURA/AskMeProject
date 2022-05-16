@@ -15,7 +15,7 @@ public class Post
     public ApplicationUser User { get; init; }
 
     /// <summary>
-    /// User who created this post ID.
+    /// User who recieve this post ID.
     /// </summary>
     public Guid UserId { get; init; }
 
@@ -48,4 +48,9 @@ public class Post
     /// Author username.
     /// </summary>
     public string AuthorName { get; init; }
+
+    /// <summary>
+    /// ID of post author.
+    /// </summary>
+    public Guid? AuthorId { get; init; }
 }

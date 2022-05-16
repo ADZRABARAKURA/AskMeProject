@@ -1,5 +1,6 @@
 using AskMe.Domain.Users.Entities;
 using AskMe.Infrastructure.DataAccess;
+using AskMe.UseCases.User.CreatePost;
 using AskMe.UseCases.User.CreateUser;
 using AskMe.Web.StartUp;
 using AskMe.Web.Web;
@@ -43,6 +44,7 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1"
     });
 });
+builder.Services.AddAutoMapper(typeof(CreatePostCommand).Assembly);
 AskMe.Web.DI.ApplicationServices.Register(builder.Services);
 
 var app = builder.Build();
