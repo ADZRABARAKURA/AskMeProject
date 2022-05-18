@@ -1,12 +1,9 @@
 ﻿namespace AskMe.UseCases.Common.Dtos.Post;
 
-/// <summary>
-/// A post to streamer.
-/// </summary>
-public record PostDto
+public record PostForDonaterDto
 {
-    /// <inheritdoc cref="Domain.Posts.Entities.Post.UserId"/>
-    public Guid UserId { get; init; }
+    /// <inheritdoc cref="Domain.Posts.Entities.Post.Id"/>
+    public Guid Id { get; set; }
 
     /// <inheritdoc cref="Domain.Posts.Entities.Post.Value"/>
     public decimal Value { get; init; }
@@ -17,11 +14,9 @@ public record PostDto
     /// <inheritdoc cref="Domain.Posts.Entities.Post.Currency"/>
     public string Currency { get; init; }
 
-    /// <inheritdoc cref="Domain.Posts.Entities.Post.AuthorName"/>
-    public string AuthorName { get; init; }
+    /// <inheritdoc cref="Domain.Posts.Entities.Post.SentDate/>
+    public DateTime SentDate { get; init; }
 
-    /// <summary>
-    /// ID of author.
-    /// </summary>
-    public Guid? AuthorID { get; init; }
+    /// <inheritdoc cref="Domain.Posts.Entities.Post.AuthorName"/>
+    public string SentToName { get; init; }
 }

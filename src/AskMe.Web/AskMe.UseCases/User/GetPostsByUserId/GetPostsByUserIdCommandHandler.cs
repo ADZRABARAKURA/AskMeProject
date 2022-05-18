@@ -10,7 +10,7 @@ namespace AskMe.UseCases.User.GetPostsByUserId;
 /// <summary>
 /// Get posts by user ID command handler.
 /// </summary>
-internal class GetPostsByUserIdCommandHandler : IRequestHandler<GetPostsByUserIdCommand, IEnumerable<PostDto>>
+internal class GetPostsByUserIdCommandHandler : IRequestHandler<GetPostsByUserIdCommand, IEnumerable<PostForStreamerDto>>
 {
     private readonly IAppDbContext appDbContext;
     private readonly IMapper mapper;
@@ -24,15 +24,15 @@ internal class GetPostsByUserIdCommandHandler : IRequestHandler<GetPostsByUserId
     }
 
 
-    public async Task<IEnumerable<PostDto>> Handle(GetPostsByUserIdCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<PostForStreamerDto>> Handle(GetPostsByUserIdCommand request, CancellationToken cancellationToken)
     {
         if (loggedUserAccessor.GetCurrentUserId() != request.Id)
         {
             throw new NotFoundException("No posts found.");
         }
-        var posts = await mapper.ProjectTo<PostDto>(appDbContext.Posts)
+        var posts = await appDbContext.Posts
             .Where(post => post.UserId == request.Id)
             .ToListAsync(cancellationToken);
-        return posts;
+        return mapper.Map<IEnumerable<PostForStreamerDto>>(posts);
     }
 }

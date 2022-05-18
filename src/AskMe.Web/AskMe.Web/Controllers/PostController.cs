@@ -21,7 +21,7 @@ public class PostController : ControllerBase
     }
 
     [HttpPost("")]
-    public async Task Register([FromForm] PostDto post, CancellationToken cancellationToken)
+    public async Task Create([FromForm] CreatePostDto post, CancellationToken cancellationToken)
     {
         var command = new CreatePostCommand(post);
         await mediator.Send(command, cancellationToken);
@@ -29,7 +29,7 @@ public class PostController : ControllerBase
 
     [HttpGet("{id}")]
     [Authorize(Roles = ExistingRoles.Streamer)]
-    public async Task<IEnumerable<PostDto>> GetUserPosts([FromQuery]Guid id, CancellationToken cancellationToken)
+    public async Task<IEnumerable<PostForStreamerDto>> GetUserPosts([FromQuery]Guid id, CancellationToken cancellationToken)
     {
         var command = new GetPostsByUserIdCommand(id);
         return await mediator.Send(command, cancellationToken);
@@ -37,7 +37,7 @@ public class PostController : ControllerBase
 
     [HttpGet("history/{id}")]
     [Authorize]
-    public async Task<IEnumerable<PostDto>> GetPostsCreatedByUser([FromQuery] Guid id, CancellationToken cancellationToken)
+    public async Task<IEnumerable<PostForDonaterDto>> GetPostsCreatedByUser([FromQuery] Guid id, CancellationToken cancellationToken)
     {
         var command = new GetPostsCreatedByUserCommand(id);
         return await mediator.Send(command, cancellationToken);

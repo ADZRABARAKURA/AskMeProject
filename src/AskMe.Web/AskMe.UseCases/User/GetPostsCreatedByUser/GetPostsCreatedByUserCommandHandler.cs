@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AskMe.UseCases.User.GetPostsCreatedByUser;
 
-internal class GetPostsCreatedByUserCommandHandler : IRequestHandler<GetPostsCreatedByUserCommand, IEnumerable<PostDto>>
+internal class GetPostsCreatedByUserCommandHandler : IRequestHandler<GetPostsCreatedByUserCommand, IEnumerable<PostForDonaterDto>>
 {
     private readonly IAppDbContext appDbContext;
     private readonly IMapper mapper;
@@ -20,15 +20,16 @@ internal class GetPostsCreatedByUserCommandHandler : IRequestHandler<GetPostsCre
         this.loggedUserAccessor = loggedUserAccessor;
     }
 
-    public Task<IEnumerable<PostDto>> Handle(GetPostsCreatedByUserCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<PostForDonaterDto>> Handle(GetPostsCreatedByUserCommand request, CancellationToken cancellationToken)
     {
         if (loggedUserAccessor.GetCurrentUserId() != request.Id)
         {
             throw new NotFoundException("");
         }
 
-        var posts = mapper.ProjectTo<PostDto>(appDbContext.Posts)
-            .Where(post => post.AuthorID == request.Id)
+        var posts = await appDbContext.Posts
+            .Where(post => post.AuthorId == request.Id)
             .ToListAsync(cancellationToken);
+        return mapper.Map<IEnumerable<PostForDonaterDto>>(posts);
     }
 }

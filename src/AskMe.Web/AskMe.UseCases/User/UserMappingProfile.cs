@@ -10,7 +10,9 @@ public class UserMappingProfile : Profile
 {
     public UserMappingProfile()
     {
-        CreateMap<Post, PostDto>().ReverseMap();
+        CreateMap<Post, CreatePostDto>().ReverseMap();
+        CreateMap<Post, PostForStreamerDto>();
+        CreateMap<Post, PostForDonaterDto>();
         CreateMap<ApplicationUser, UserDto>().ReverseMap();
     }
 }

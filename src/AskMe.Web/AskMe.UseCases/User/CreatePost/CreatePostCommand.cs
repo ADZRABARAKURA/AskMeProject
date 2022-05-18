@@ -3,4 +3,4 @@ using MediatR;
 
 namespace AskMe.UseCases.User.CreatePost;
 
-public record CreatePostCommand(PostDto Post) : IRequest;
+public record CreatePostCommand(CreatePostDto Post) : IRequest;

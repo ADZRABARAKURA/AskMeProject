@@ -7,4 +7,4 @@ namespace AskMe.UseCases.User.GetPostsByUserId;
 /// Get posts by user ID command.
 /// </summary>
 /// <param name="Id">User ID.</param>
-public record GetPostsByUserIdCommand(Guid Id) : IRequest<IEnumerable<PostDto>>;
+public record GetPostsByUserIdCommand(Guid Id) : IRequest<IEnumerable<PostForStreamerDto>>;
