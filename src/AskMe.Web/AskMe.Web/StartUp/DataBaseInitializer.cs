@@ -20,7 +20,6 @@ internal sealed class DatabaseInitializer : IAsyncInitializer
 
     public async Task InitializeAsync()
     {
-        await appDbContext.Database.EnsureCreatedAsync();
         await appDbContext.Database.MigrateAsync();
         await AddDefaultRolesAsync();
         await UpdateRolesAsync();
