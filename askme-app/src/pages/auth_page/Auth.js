@@ -9,7 +9,10 @@ import "./Auth.css";
 export default class Test extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { formSelected: "registration" };
+        this.state = {
+            formSelected: "registration",
+            isLoginExist: true
+        };
     }
 
     authChange = (e) => {
@@ -28,6 +31,8 @@ export default class Test extends React.Component {
         e.target.classList.add("active-btn");
     };
 
+
+
     formRender = (inputs) => {
         let content = [];
         for (let input of inputs) {
@@ -35,6 +40,29 @@ export default class Test extends React.Component {
         }
         return content;
     };
+
+    hadleNext() {
+        const login = document.querySelector('#login').value;
+        const password = document.querySelector('#password').value;
+
+        if (localStorage.getItem('login') !== login) {
+            localStorage.setItem('login', login);
+            localStorage.setItem('password', password);
+            this.setState(prev => {
+                return {
+                    formSelected: prev.formSelected,
+                    isLoginExist: false
+                }
+            });
+        } else {
+            this.setState(prev => {
+                return {
+                    formSelected: prev.formSelected,
+                    isLoginExist: true
+                }
+            });
+        }
+    }
 
     render() {
         return (
@@ -68,9 +96,9 @@ export default class Test extends React.Component {
                                 {this.formRender(
                                     FORM_CONFIG[this.state.formSelected].inputs
                                 )}
-                                <Link to="/profile">
+                                <Link to={this.state.isLoginExist ? '' : '/profile'}>
                                     <div className="left-reg__submit">
-                                        <button type="submit">Далее</button>
+                                        <button onClick={() => this.hadleNext()} type="submit">Далее</button>
                                     </div>
                                 </Link>
                             </form>

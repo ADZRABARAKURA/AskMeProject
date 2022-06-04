@@ -9,6 +9,7 @@ function input(props) {
                 <input
                     type={data.type}
                     name={data.name}
+                    id={data.name}
                     placeholder={data.placeholder}
                 />
             </div>
