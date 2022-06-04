@@ -18,6 +18,7 @@ body {
 .wrapper {
     min-height: 100%;
 }
+
 .main {
     position: relative;
     display: flex;
@@ -25,12 +26,14 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+
 .main__angel {
     position: absolute;
     max-height: 100vh;
     left: -100px;
     top: 0;
 }
+
 .reg {
     width: 1000px;
     height: 600px;
@@ -44,6 +47,7 @@ body {
 .reg {
     display: flex;
 }
+
 .left-reg {
     flex: 0 1 50%;
     padding: 60px;
@@ -51,6 +55,7 @@ body {
     flex-direction: column;
     gap: 15px;
 }
+
 .left-reg__choose {
     display: flex;
     gap: 12px;
@@ -66,11 +71,13 @@ body {
     line-height: 23px;
     color: #C0C0C0;
     opacity: 0.31;
-    
+
 }
+
 .left-reg__registation:hover {
     cursor: pointer;
 }
+
 .left-reg__auth {
     font-family: 'Roboto';
     font-style: normal;
@@ -80,6 +87,7 @@ body {
     color: #C0C0C0;
     opacity: 0.31;
 }
+
 .left-reg__auth:hover {
     cursor: pointer;
 }
@@ -92,6 +100,7 @@ body {
     border-bottom: 3px solid #B00062;
     opacity: 1;
 }
+
 .left-reg__welcome {
     font-family: 'Roboto';
     font-style: normal;
@@ -103,6 +112,7 @@ body {
 
     color: #C0C0C0;
 }
+
 label {
     font-family: 'Roboto';
     font-style: normal;
@@ -111,24 +121,26 @@ label {
     line-height: 19px;
     color: #C0C0C0;
 }
-.left-reg__text {
-}
-.left-reg__form {
-}
+
+.left-reg__text {}
+
+.left-reg__form {}
+
 .left-reg__mail input {
     margin-top: 5px;
     border: 0;
     font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 23px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
 
-/* Светлый */
+    /* Светлый */
 
-color: #FFFFFF;
+    color: #FFFFFF;
     background: #202020;
 }
+
 .left-reg__mail {
     margin-bottom: 12px;
     padding: 10px;
@@ -136,6 +148,7 @@ color: #FFFFFF;
     display: flex;
     flex-direction: column;
 }
+
 .left-reg__login input {
     margin-top: 5px;
     border: 0;
@@ -147,6 +160,7 @@ color: #FFFFFF;
     color: #FFFFFF;
     background: #202020;
 }
+
 .left-reg__login {
     margin-bottom: 12px;
     padding: 10px;
@@ -154,9 +168,11 @@ color: #FFFFFF;
     display: flex;
     flex-direction: column;
 }
+
 .left-reg__login.hide {
     display: none;
 }
+
 .left-reg__password input {
     margin-top: 5px;
     border: 0;
@@ -168,12 +184,14 @@ color: #FFFFFF;
     color: #FFFFFF;
     background: #202020;
 }
+
 .left-reg__password {
     padding: 10px;
     background: #202020;
     display: flex;
     flex-direction: column;
 }
+
 .left-reg__submit {
     margin-top: 20px;
     display: inline-flex;
@@ -185,9 +203,11 @@ color: #FFFFFF;
     color: #FFFFFF;
     padding: 12px 24px;
 }
+
 .left-reg__submit:hover {
     cursor: pointer;
 }
+
 .left-reg__submit button {
     background: #181818;
     font-family: 'Roboto';

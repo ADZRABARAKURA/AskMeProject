@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import Main from "./pages/main_page/Main";
 import Auth from "./pages/auth_page/Auth";
-import './index.css'
+import Profile from "./pages/profile_page/profile";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -12,6 +13,7 @@ root.render(
         <Routes>
             <Route path="" exact element={<App />}>
                 <Route path="" element={<Main />} />
+                <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="/auth" element={<Auth />} />
         </Routes>
