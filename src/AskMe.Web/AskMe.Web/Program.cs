@@ -38,6 +38,8 @@ var configuration = builder.Configuration;
 builder.Services.AddDbContext<AppDbContext>(new DatabaseOptionsSetup(configuration.GetConnectionString("AskMeDb")).Setup);
 builder.Services.AddSwaggerGen(c =>
 {
+    c.IncludeXmlComments(SystemTextJsonHelper.GetAssemblyLocationByType(typeof(AskMe.UseCases.Common.Dtos.Post.CreatePostDto)));
+    c.IncludeXmlComments(SystemTextJsonHelper.GetAssemblyLocationByType(typeof(AskMe.Web.Controllers.PostController)));
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "AskMeApi",
@@ -59,6 +61,8 @@ using (var roleManager = scope.ServiceProvider.GetService<RoleManager<Applicatio
 }
 #endregion
 
+app.UseAuthentication();
+app.UseAuthorization();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -71,7 +75,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseMiddleware<ApiExceptionMiddleware>();
-app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

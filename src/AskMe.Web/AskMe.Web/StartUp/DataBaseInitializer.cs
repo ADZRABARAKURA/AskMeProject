@@ -53,7 +53,7 @@ internal sealed class DatabaseInitializer : IAsyncInitializer
         if (await roleManager.FindByNameAsync(streamerRoleName) == null)
         {
             var streamerRole = new ApplicationRole();
-            await roleManager.SetRoleNameAsync(streamerRole, adminRoleName);
+            await roleManager.SetRoleNameAsync(streamerRole, streamerRoleName);
             await roleManager.UpdateNormalizedRoleNameAsync(streamerRole);
             await roleManager.CreateAsync(streamerRole);
         }

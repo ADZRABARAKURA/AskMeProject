@@ -3,6 +3,7 @@ using System;
 using AskMe.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,43 +11,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AskMe.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220605055836_AddRecieverNameToPost")]
+    partial class AddRecieverNameToPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("AskMe.Domain.Posts.Entities.Goal", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<decimal>("CurrentValue")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid?>("UserProfileId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserProfileId");
-
-                    b.ToTable("Goals");
-                });
 
             modelBuilder.Entity("AskMe.Domain.Posts.Entities.Post", b =>
                 {
@@ -82,76 +55,17 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
                     b.Property<decimal>("Value")
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("AskMe.Domain.Posts.Entities.Publication", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("varchar(2000)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("EditDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("SubscriptionId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid?>("UserProfileId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubscriptionId");
-
-                    b.HasIndex("UserProfileId");
-
-                    b.ToTable("Publications");
-                });
-
-            modelBuilder.Entity("AskMe.Domain.Posts.Entities.Subscription", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid?>("UserProfileId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserProfileId");
-
-                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("AskMe.Domain.Users.Entities.ApplicationRole", b =>
@@ -234,9 +148,6 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<Guid?>("UserProfileId")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -246,35 +157,7 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.HasIndex("UserProfileId");
-
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("AskMe.Domain.Users.Entities.UserProfile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Passion")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("References")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -376,38 +259,15 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AskMe.Domain.Posts.Entities.Goal", b =>
+            modelBuilder.Entity("AskMe.Domain.Posts.Entities.Post", b =>
                 {
-                    b.HasOne("AskMe.Domain.Users.Entities.UserProfile", null)
-                        .WithMany("Goals")
-                        .HasForeignKey("UserProfileId");
-                });
-
-            modelBuilder.Entity("AskMe.Domain.Posts.Entities.Publication", b =>
-                {
-                    b.HasOne("AskMe.Domain.Posts.Entities.Subscription", "Subscription")
+                    b.HasOne("AskMe.Domain.Users.Entities.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("SubscriptionId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("AskMe.Domain.Users.Entities.UserProfile", null)
-                        .WithMany("Publications")
-                        .HasForeignKey("UserProfileId");
-
-                    b.Navigation("Subscription");
-                });
-
-            modelBuilder.Entity("AskMe.Domain.Posts.Entities.Subscription", b =>
-                {
-                    b.HasOne("AskMe.Domain.Users.Entities.UserProfile", null)
-                        .WithMany("Subscriptions")
-                        .HasForeignKey("UserProfileId");
-                });
-
-            modelBuilder.Entity("AskMe.Domain.Users.Entities.ApplicationUser", b =>
-                {
-                    b.HasOne("AskMe.Domain.Users.Entities.UserProfile", null)
-                        .WithMany("Subscribers")
-                        .HasForeignKey("UserProfileId");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -459,17 +319,6 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AskMe.Domain.Users.Entities.UserProfile", b =>
-                {
-                    b.Navigation("Goals");
-
-                    b.Navigation("Publications");
-
-                    b.Navigation("Subscribers");
-
-                    b.Navigation("Subscriptions");
                 });
 #pragma warning restore 612, 618
         }

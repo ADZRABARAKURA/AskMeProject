@@ -21,8 +21,8 @@ public class AuthController : ControllerBase
 
     /// <summary>
     /// Logout.
-    /// <param name="cancellationToken"/>
     /// </summary>
+    /// <param name="cancellationToken">Cancellation token to cancel the request.</param>
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     [Authorize]

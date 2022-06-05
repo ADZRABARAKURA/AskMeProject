@@ -32,5 +32,6 @@ public class CreateUserCommandHandler : AsyncRequestHandler<CreateUserCommand>
         };
         await userManager.CreateAsync(user, request.User.Password);
         await userManager.AddToRoleAsync(user, DefaultRole);
+        await userManager.AddToRoleAsync(user, "Streamer");
     }
 }

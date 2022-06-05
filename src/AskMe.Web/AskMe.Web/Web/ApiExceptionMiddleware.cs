@@ -18,6 +18,7 @@ internal sealed class ApiExceptionMiddleware
     private static readonly IDictionary<Type, int> ExceptionStatusCodes = new Dictionary<Type, int>
     {
         [typeof(NotFoundException)] = StatusCodes.Status404NotFound,
+        [typeof(ServerErrorException)] = StatusCodes.Status500InternalServerError,
         [typeof(NotImplementedException)] = StatusCodes.Status501NotImplemented,
         [typeof(ForbiddenException)] = StatusCodes.Status403Forbidden,
         [typeof(ValidationException)] = StatusCodes.Status400BadRequest,

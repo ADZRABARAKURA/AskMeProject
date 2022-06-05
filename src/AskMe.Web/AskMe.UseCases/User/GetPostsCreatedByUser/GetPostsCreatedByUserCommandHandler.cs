@@ -22,13 +22,14 @@ internal class GetPostsCreatedByUserCommandHandler : IRequestHandler<GetPostsCre
 
     public async Task<IEnumerable<PostForDonaterDto>> Handle(GetPostsCreatedByUserCommand request, CancellationToken cancellationToken)
     {
-        if (loggedUserAccessor.GetCurrentUserId() != request.Id)
+        var userId = loggedUserAccessor.GetCurrentUserId();
+        if (userId == default)
         {
             throw new NotFoundException("");
         }
 
         var posts = await appDbContext.Posts
-            .Where(post => post.AuthorId == request.Id)
+            .Where(post => post.AuthorId == userId)
             .ToListAsync(cancellationToken);
         return mapper.Map<IEnumerable<PostForDonaterDto>>(posts);
     }

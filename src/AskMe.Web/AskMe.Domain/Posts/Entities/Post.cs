@@ -1,6 +1,4 @@
-﻿using AskMe.Domain.Users.Entities;
-
-namespace AskMe.Domain.Posts.Entities;
+﻿namespace AskMe.Domain.Posts.Entities;
 
 public class Post
 {
@@ -10,14 +8,14 @@ public class Post
     public Guid Id { get; init; }
 
     /// <summary>
-    /// User who created this post.
-    /// </summary>
-    public ApplicationUser User { get; init; }
-
-    /// <summary>
     /// User who recieve this post ID.
     /// </summary>
-    public Guid UserId { get; init; }
+    public Guid RecieverId { get; init; }
+
+    /// <summary>
+    /// User who recieve this post name.
+    /// </summary>
+    public string RecieverName { get; init; }
 
     /// <summary>
     /// Value of post(Money).
