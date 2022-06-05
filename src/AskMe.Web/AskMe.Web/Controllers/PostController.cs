@@ -43,7 +43,7 @@ public class PostController : ControllerBase
     /// <param name="id">Post id.</param>
     /// <param name="cancellationToken">Cancellation token to cancel the request</param>
     /// <returns>Post.</returns>
-    [ProducesResponseType(200)]
+    [ProducesResponseType(typeof(PostForDonaterDto), 200)]
     [ProducesResponseType(400)]
     [HttpGet("history/sent/{id}")]
     [Authorize(Roles = ExistingRoles.User)]
@@ -61,7 +61,7 @@ public class PostController : ControllerBase
     /// <param name="id">Post id</param>
     /// <param name="cancellationToken">Cancellation token to cancel the request</param>
     /// <returns>Post.</returns>
-    [ProducesResponseType(200)]
+    [ProducesResponseType(typeof(PostForStreamerDto), 200)]
     [ProducesResponseType(400)]
     [HttpGet("history/received/{id}")]
     [Authorize(Roles = ExistingRoles.Streamer)]
@@ -76,7 +76,7 @@ public class PostController : ControllerBase
     /// </summary>
     /// <param name="cancellationToken">Cancellation token to cancel the request</param>
     /// <returns>A list of posts.</returns>
-    [ProducesResponseType(200)]
+    [ProducesResponseType(typeof(IEnumerable<PostForStreamerDto>), 200)]
     [HttpGet("history/received")]
     [Authorize(Roles = ExistingRoles.Streamer)]
     public async Task<IEnumerable<PostForStreamerDto>> GetUserPosts( CancellationToken cancellationToken)
@@ -90,7 +90,7 @@ public class PostController : ControllerBase
     /// </summary>
     /// <param name="cancellationToken">Cancellation token to cancel the request</param>
     /// <returns>A list of posts.</returns>
-    [ProducesResponseType(200)]
+    [ProducesResponseType(typeof(IEnumerable<PostForDonaterDto>), 200)]
     [HttpGet("history/sent")]
     [Authorize(Roles = ExistingRoles.User)]
     public async Task<IEnumerable<PostForDonaterDto>> GetPostsCreatedByUser(CancellationToken cancellationToken)
