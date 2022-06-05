@@ -59,6 +59,8 @@ using (var roleManager = scope.ServiceProvider.GetService<RoleManager<Applicatio
 }
 #endregion
 
+app.UseAuthentication();
+app.UseAuthorization();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -71,7 +73,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseMiddleware<ApiExceptionMiddleware>();
-app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

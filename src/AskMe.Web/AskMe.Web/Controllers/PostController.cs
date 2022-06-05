@@ -2,6 +2,8 @@
 using AskMe.UseCases.User.CreatePost;
 using AskMe.UseCases.User.GetPostsByUserId;
 using AskMe.UseCases.User.GetPostsCreatedByUser;
+using AskMe.UseCases.User.GetRecievedPostById;
+using AskMe.UseCases.User.GetSentPostById;
 using AskMe.Web.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -27,19 +29,35 @@ public class PostController : ControllerBase
         await mediator.Send(command, cancellationToken);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("history/sent/{id}")]
+    [Authorize(Roles = ExistingRoles.User)]
+    public async Task<PostForDonaterDto> GetSentPostById(Guid id, CancellationToken cancellationToken)
+    {
+        var command = new GetSentPostByIdCommand(id);
+        return await mediator.Send(command, cancellationToken);
+    }
+
+    [HttpGet("history/received/{id}")]
     [Authorize(Roles = ExistingRoles.Streamer)]
-    public async Task<IEnumerable<PostForStreamerDto>> GetUserPosts([FromQuery]Guid id, CancellationToken cancellationToken)
+    public async Task<PostForStreamerDto> GetRecievedPostById(Guid id, CancellationToken cancellationToken)
+    {
+        var command = new GetRecievedPostByIdCommand(id);
+        return await mediator.Send(command, cancellationToken);
+    }
+
+    [HttpGet("history/received/{id}")]
+    [Authorize(Roles = ExistingRoles.Streamer)]
+    public async Task<IEnumerable<PostForStreamerDto>> GetUserPosts(Guid id, CancellationToken cancellationToken)
     {
         var command = new GetPostsByUserIdCommand(id);
         return await mediator.Send(command, cancellationToken);
     }
 
-    [HttpGet("history/{id}")]
-    [Authorize]
-    public async Task<IEnumerable<PostForDonaterDto>> GetPostsCreatedByUser([FromQuery] Guid id, CancellationToken cancellationToken)
+    [HttpGet("history/sent")]
+    [Authorize(Roles = ExistingRoles.User)]
+    public async Task<IEnumerable<PostForDonaterDto>> GetPostsCreatedByUser(CancellationToken cancellationToken)
     {
-        var command = new GetPostsCreatedByUserCommand(id);
+        var command = new GetPostsCreatedByUserCommand();
         return await mediator.Send(command, cancellationToken);
     }
 }

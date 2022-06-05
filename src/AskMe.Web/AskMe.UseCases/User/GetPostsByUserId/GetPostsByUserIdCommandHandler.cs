@@ -31,7 +31,7 @@ internal class GetPostsByUserIdCommandHandler : IRequestHandler<GetPostsByUserId
             throw new NotFoundException("No posts found.");
         }
         var posts = await appDbContext.Posts
-            .Where(post => post.UserId == request.Id)
+            .Where(post => post.RecieverId == request.Id)
             .ToListAsync(cancellationToken);
         return mapper.Map<IEnumerable<PostForStreamerDto>>(posts);
     }

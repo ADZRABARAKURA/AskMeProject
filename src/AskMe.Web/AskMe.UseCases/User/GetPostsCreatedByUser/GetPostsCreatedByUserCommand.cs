@@ -3,4 +3,4 @@ using MediatR;
 
 namespace AskMe.UseCases.User.GetPostsCreatedByUser;
 
-public record GetPostsCreatedByUserCommand(Guid Id) : IRequest<IEnumerable<PostForDonaterDto>>;
+public record GetPostsCreatedByUserCommand : IRequest<IEnumerable<PostForDonaterDto>>;
