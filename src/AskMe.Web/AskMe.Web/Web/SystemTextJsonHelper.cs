@@ -16,6 +16,9 @@ public class SystemTextJsonHelper : IJsonHelper
         htmlSafeJsonSerializerOptions = GetHtmlSafeSerializerOptions(options.Value.SerializerOptions);
     }
 
+    public static string GetAssemblyLocationByType(Type type) =>
+            Path.Combine(AppContext.BaseDirectory, $"{type.Assembly.GetName().Name}.xml");
+
     public IHtmlContent Serialize(object value)
     {
         var json = JsonSerializer.Serialize(value, htmlSafeJsonSerializerOptions);

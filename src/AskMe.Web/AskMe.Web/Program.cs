@@ -38,6 +38,8 @@ var configuration = builder.Configuration;
 builder.Services.AddDbContext<AppDbContext>(new DatabaseOptionsSetup(configuration.GetConnectionString("AskMeDb")).Setup);
 builder.Services.AddSwaggerGen(c =>
 {
+    c.IncludeXmlComments(SystemTextJsonHelper.GetAssemblyLocationByType(typeof(AskMe.UseCases.Common.Dtos.Post.CreatePostDto)));
+    c.IncludeXmlComments(SystemTextJsonHelper.GetAssemblyLocationByType(typeof(AskMe.Web.Controllers.PostController)));
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "AskMeApi",

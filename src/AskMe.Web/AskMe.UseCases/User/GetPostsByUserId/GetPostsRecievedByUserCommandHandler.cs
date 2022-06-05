@@ -10,13 +10,13 @@ namespace AskMe.UseCases.User.GetPostsByUserId;
 /// <summary>
 /// Get posts by user ID command handler.
 /// </summary>
-internal class GetPostsByUserIdCommandHandler : IRequestHandler<GetPostsByUserIdCommand, IEnumerable<PostForStreamerDto>>
+internal class GetPostsRecievedByUserCommandHandler : IRequestHandler<GetPostsRecievedByUserCommand, IEnumerable<PostForStreamerDto>>
 {
     private readonly IAppDbContext appDbContext;
     private readonly IMapper mapper;
     private readonly ILoggedUserAccessor loggedUserAccessor;
 
-    public GetPostsByUserIdCommandHandler(IAppDbContext appDbContext, IMapper mapper, ILoggedUserAccessor loggedUserAccessor)
+    public GetPostsRecievedByUserCommandHandler(IAppDbContext appDbContext, IMapper mapper, ILoggedUserAccessor loggedUserAccessor)
     {
         this.appDbContext = appDbContext;
         this.mapper = mapper;
@@ -24,14 +24,10 @@ internal class GetPostsByUserIdCommandHandler : IRequestHandler<GetPostsByUserId
     }
 
 
-    public async Task<IEnumerable<PostForStreamerDto>> Handle(GetPostsByUserIdCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<PostForStreamerDto>> Handle(GetPostsRecievedByUserCommand request, CancellationToken cancellationToken)
     {
-        if (loggedUserAccessor.GetCurrentUserId() != request.Id)
-        {
-            throw new NotFoundException("No posts found.");
-        }
         var posts = await appDbContext.Posts
-            .Where(post => post.RecieverId == request.Id)
+            .Where(post => post.RecieverId == loggedUserAccessor.GetCurrentUserId())
             .ToListAsync(cancellationToken);
         return mapper.Map<IEnumerable<PostForStreamerDto>>(posts);
     }
