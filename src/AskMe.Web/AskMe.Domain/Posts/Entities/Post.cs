@@ -40,7 +40,7 @@ public class Post
     /// <summary>
     /// Post text.
     /// </summary>
-    public string Text { get; init; }
+    public string? Text { get; init; }
 
     /// <summary>
     /// Author username.

@@ -3,6 +3,7 @@ using System;
 using AskMe.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AskMe.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220606165410_MakeStringFieldsInUserProfileNullable")]
+    partial class MakeStringFieldsInUserProfileNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,6 +81,7 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Text")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("Value")
@@ -96,6 +99,7 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("varchar(2000)");
 
@@ -135,6 +139,7 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime?>("EditDate")

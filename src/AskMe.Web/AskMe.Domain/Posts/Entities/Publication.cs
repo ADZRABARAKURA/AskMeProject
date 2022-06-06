@@ -23,7 +23,7 @@ public class Publication
     /// Publication content.
     /// </summary>
     [MaxLength(2000)]
-    public string Content { get; set; }
+    public string? Content { get; set; }
 
     /// <summary>
     /// Creation date.

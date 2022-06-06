@@ -11,11 +11,13 @@ public class CreateUserCommandHandler : AsyncRequestHandler<CreateUserCommand>
     private const string DefaultRole = "User";
     private readonly ILoggedUserAccessor loggedUserAccessor;
     private readonly UserManager<ApplicationUser> userManager;
+    private readonly IAppDbContext appDbContext;
 
-    public CreateUserCommandHandler(ILoggedUserAccessor loggedUserAccessor, UserManager<ApplicationUser> userManager)
+    public CreateUserCommandHandler(ILoggedUserAccessor loggedUserAccessor, UserManager<ApplicationUser> userManager, IAppDbContext appDbContext)
     {
         this.loggedUserAccessor = loggedUserAccessor;
         this.userManager = userManager;
+        this.appDbContext = appDbContext;
     }
 
     protected override async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -33,5 +35,11 @@ public class CreateUserCommandHandler : AsyncRequestHandler<CreateUserCommand>
         await userManager.CreateAsync(user, request.User.Password);
         await userManager.AddToRoleAsync(user, DefaultRole);
         await userManager.AddToRoleAsync(user, "Streamer");
+        var profile = new UserProfile()
+        {
+            UserId = user.Id
+        };
+        await appDbContext.Profiles.AddAsync(profile, cancellationToken);
+        await appDbContext.SaveChangesAsync(cancellationToken);
     }
 }

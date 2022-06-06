@@ -38,7 +38,7 @@ public class Subscription
     /// <summary>
     /// A description why the user might want to take this subscription.
     /// </summary>
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     /// <summary>
     /// Subscription price.

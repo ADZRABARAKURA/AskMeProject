@@ -20,12 +20,12 @@ public class UserProfile
     /// <summary>
     /// User's description.
     /// </summary>
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     /// <summary>
     /// Vocation of the user, what he does.
     /// </summary>
-    public string Passion { get; set; }
+    public string? Passion { get; set; }
 
     /// <summary>
     /// User subscribers.
@@ -40,7 +40,7 @@ public class UserProfile
     /// <summary>
     /// References to user content separated by commas.
     /// </summary>
-    public string References { get; init; }
+    public string? References { get; init; }
 
     /// <summary>
     /// User's publications.
