@@ -18,12 +18,15 @@ public class RoleController
     }
 
     /// <summary>
-    /// Give to user by user id.
+    /// Give role to user by user id.
     /// </summary>
     /// <param name="id">User id.</param>
     /// <param name="role">Application role.</param>
     /// <param name="cancellationToken">Cancellation token to cancel the request.</param>
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
     [HttpPut]
+    [Authorize(Roles = ExistingRoles.Admin)]
     public async Task GiveRole(Guid id, string role, CancellationToken cancellationToken)
     {
         var command = new GiveRoleToUserCommand(id, role);

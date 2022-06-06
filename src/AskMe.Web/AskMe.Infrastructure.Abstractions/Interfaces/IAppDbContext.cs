@@ -14,6 +14,8 @@ public interface IAppDbContext : IDbContextWithSets, IDisposable
 
     DbSet<Subscription> Subscriptions { get; }
 
+    DbSet<UserSubscription> UserSubscriptions { get; }
+
     DbSet<Publication> Publications { get; }
 
     DbSet<Goal> Goals { get; }
