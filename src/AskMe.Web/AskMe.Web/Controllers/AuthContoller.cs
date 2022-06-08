@@ -49,18 +49,18 @@ public class AuthController : ControllerBase
     }
 
     /// <summary>
-    /// Authorize user.
+    /// Authenticate user.
     /// </summary>
     /// <param name="user">User login DTO.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
-    /// <returns></returns>
+    /// <returns>Token and User id.</returns>
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     [AllowAnonymous]
     [HttpPost("login")]
-    public async Task Login([FromForm] UserLoginDto user, CancellationToken cancellationToken)
+    public async Task<SuccessfulLoginDto> Login([FromForm] UserLoginDto user, CancellationToken cancellationToken)
     {
         var command = new LoginUserCommand(user);
-        await mediator.Send(command, cancellationToken);
+        return await mediator.Send(command, cancellationToken);
     }
 }

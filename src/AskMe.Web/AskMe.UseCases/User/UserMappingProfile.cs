@@ -20,9 +20,30 @@ public class UserMappingProfile : Profile
             .ForMember(dto => dto.IsActive, opt => opt.MapFrom(entity => entity.ExpireAt > DateTime.Now))
             .ForMember(dto => dto.SubscriptionTitle, opt => opt.MapFrom(entity => entity.Subscription.Title));
         CreateMap<UserProfile, UserProfileDto>()
-            .ForMember(dto => dto.CheapestSubscriptionPrice, opt => opt.MapFrom(entity => entity.Subscriptions.Min(sub => sub.Price)))
-            .ForMember(dto => dto.Subscribers, opt => opt.MapFrom(entity => entity.Subscribers.Count));
+            .ForMember(dto => dto.CheapestSubscriptionPrice, opt => opt.MapFrom(entity => FindCheapestSubscription(entity.Subscriptions)))
+            .ForMember(dto => dto.Subscribers, opt => opt.MapFrom(entity => entity.Subscribers.Count))
+            .ForMember(dto => dto.References, opt => opt.MapFrom(entity => GetReferences(entity.References)));
         CreateMap<Publication, PublicationDto>();
         CreateMap<ApplicationUser, UserDto>().ReverseMap();
+    }
+
+    private string[] GetReferences(string references)
+    {
+        return references is null ? new string[0] : references.Split(',');
+    }
+
+    private object FindCheapestSubscription(List<Subscription> subscriptions)
+    {
+        var cheapestSubscription = 1000M;
+        foreach (var subscription in subscriptions)
+        {
+            var price = ((int)subscription.Price);
+            if (((int)subscription.Price) < cheapestSubscription)
+            {
+                cheapestSubscription = price;
+            }
+        }
+
+        return cheapestSubscription == 1000 ? default : cheapestSubscription;
     }
 }

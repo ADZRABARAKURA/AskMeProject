@@ -3,4 +3,4 @@ using MediatR;
 
 namespace AskMe.UseCases.User.LoginUser;
 
-public record LoginUserCommand(UserLoginDto User) : IRequest;
+public record LoginUserCommand(UserLoginDto User) : IRequest<SuccessfulLoginDto>;

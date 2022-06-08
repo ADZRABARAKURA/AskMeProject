@@ -5,7 +5,7 @@ using AskMe.UseCases.User.CreateUser;
 using AskMe.Web.StartUp;
 using AskMe.Web.Web;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -18,12 +18,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options =>
-            {
-                options.Cookie.HttpOnly = true;
-                options.Cookie.Name = "AskMe.AuthCookie";
-            });
 builder.Services.AddMediatR(typeof(CreateUserCommand).Assembly);
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
             .AddEntityFrameworkStores<AppDbContext>()
@@ -35,10 +29,28 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = $"/auth/logout";
 });
 var configuration = builder.Configuration;
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+            .AddJwtBearer(new JwtOptionsSetup(
+                configuration["Jwt:SecretKey"],
+                configuration["Jwt:Issuer"]).Setup
+);
 builder.Services.AddDbContext<AppDbContext>(new DatabaseOptionsSetup(configuration.GetConnectionString("AskMeDb")).Setup);
 builder.Services.AddSwaggerGen(c =>
 {
     c.IncludeXmlComments(SystemTextJsonHelper.GetAssemblyLocationByType(typeof(AskMe.UseCases.Common.Dtos.Post.CreatePostDto)));
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Insert JWT token to the field.",
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Name = "bearer",
+        Type = SecuritySchemeType.Http
+    });
+    c.AddSecurityRequirement(SwaggerSecurityRequirement.GetSecurityRequrement());
     c.IncludeXmlComments(SystemTextJsonHelper.GetAssemblyLocationByType(typeof(AskMe.Web.Controllers.PostController)));
     c.SwaggerDoc("v1", new OpenApiInfo
     {

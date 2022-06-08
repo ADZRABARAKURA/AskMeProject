@@ -13,6 +13,7 @@ internal static class ApplicationServices
         services.AddSingleton<IJsonHelper, SystemTextJsonHelper>();
         services.AddScoped<IAppDbContext, AppDbContext>();
         services.AddScoped<ILoggedUserAccessor, LoggedUserAccessor>();
+        services.AddScoped<IAuthenticationTokenService, JwtTokenService>();
     }
 }
 
