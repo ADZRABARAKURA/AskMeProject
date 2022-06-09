@@ -1,6 +1,7 @@
 ﻿using AskMe.Domain.Users.Entities;
 using AskMe.DomainServices.Exceptions;
 using AskMe.Infrastructure.Abstractions.Interfaces;
+using AskMe.UseCases.Common.Dtos.Post;
 using AskMe.UseCases.Common.Dtos.UserProfile;
 using AutoMapper;
 using MediatR;
@@ -31,6 +32,12 @@ internal class GetUserProfileByIdCommandHandler : IRequestHandler<GetUserProfile
         }
         var profile = await appDbContext.Profiles
             .FirstOrDefaultAsync(entity => entity.UserId == user.Id);
-        return mapper.Map<UserProfileDto>(profile);
+        var dto =  mapper.Map<UserProfileDto>(profile);
+        var publications = await mapper
+            .ProjectTo<PublicationDto>(appDbContext.Publications)
+            .Where(p => p.UserId == request.Id)
+            .ToListAsync(cancellationToken);
+        dto.Publications = publications;
+        return dto;
     }
 }

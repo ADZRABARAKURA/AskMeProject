@@ -40,5 +40,5 @@ public record UserProfileDto
     /// <summary>
     /// Publications.
     /// </summary>
-    public IEnumerable<PublicationDto> Publications { get; init; }
+    public IEnumerable<PublicationDto> Publications { get; set; }
 }

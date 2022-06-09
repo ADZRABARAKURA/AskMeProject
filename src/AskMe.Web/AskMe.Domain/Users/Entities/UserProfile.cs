@@ -43,11 +43,6 @@ public class UserProfile
     public string? References { get; init; }
 
     /// <summary>
-    /// User's publications.
-    /// </summary>
-    public List<Publication> Publications { get; init; } = new List<Publication>();
-
-    /// <summary>
     /// User's goals.
     /// </summary>
     public List<Goal> Goals { get; init; } = new List<Goal>();

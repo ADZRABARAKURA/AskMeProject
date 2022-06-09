@@ -3,6 +3,7 @@ using System;
 using AskMe.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AskMe.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220609173159_ChangePublicationEntity")]
+    partial class ChangePublicationEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,9 +118,12 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid?>("UserProfileId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("SubscriptionId");
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("Publications");
                 });
@@ -414,11 +419,9 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
 
             modelBuilder.Entity("AskMe.Domain.Posts.Entities.Publication", b =>
                 {
-                    b.HasOne("AskMe.Domain.Posts.Entities.Subscription", "Subscription")
-                        .WithMany()
-                        .HasForeignKey("SubscriptionId");
-
-                    b.Navigation("Subscription");
+                    b.HasOne("AskMe.Domain.Users.Entities.UserProfile", null)
+                        .WithMany("Publications")
+                        .HasForeignKey("UserProfileId");
                 });
 
             modelBuilder.Entity("AskMe.Domain.Posts.Entities.Subscription", b =>
@@ -500,6 +503,8 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
             modelBuilder.Entity("AskMe.Domain.Users.Entities.UserProfile", b =>
                 {
                     b.Navigation("Goals");
+
+                    b.Navigation("Publications");
 
                     b.Navigation("Subscribers");
 

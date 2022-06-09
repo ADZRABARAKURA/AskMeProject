@@ -13,8 +13,17 @@ public record PublicationDto
     /// <summary>
     /// Publication description.
     /// </summary>
-    public string Description { get; init; }
+    public string Header { get; init; }
 
+    /// <summary>
+    /// Publication content.
+    /// </summary>
+    public string? Content { get; init; }
+
+    /// <summary>
+    /// User id.
+    /// </summary>
+    public Guid UserId { get; init; }
 
     /// <summary>
     /// The name of the subscription that is required to view the publication
@@ -24,5 +33,5 @@ public record PublicationDto
     /// <summary>
     /// Is post available to current user.
     /// </summary>
-    public bool Availability { get; init; }
+    public bool IsAvailable { get; set; }
 }
