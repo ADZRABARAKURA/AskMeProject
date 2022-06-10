@@ -45,10 +45,12 @@ export default class Test extends React.Component {
         const login = document.querySelector('#login').value;
         const password = document.querySelector('#password').value;
 
+        
         if (localStorage.getItem('login') !== login) {
             localStorage.setItem('login', login);
             localStorage.setItem('password', password);
             this.setState(prev => {
+                
                 return {
                     formSelected: prev.formSelected,
                     isLoginExist: false
@@ -56,6 +58,7 @@ export default class Test extends React.Component {
             });
         } else {
             this.setState(prev => {
+                console.log(prev);
                 return {
                     formSelected: prev.formSelected,
                     isLoginExist: true
@@ -96,9 +99,12 @@ export default class Test extends React.Component {
                                 {this.formRender(
                                     FORM_CONFIG[this.state.formSelected].inputs
                                 )}
-                                <Link to={this.state.isLoginExist ? '' : '/profile'}>
+                                <Link to='/profile'>
                                     <div className="left-reg__submit">
-                                        <button onClick={() => this.hadleNext()} type="submit">Далее</button>
+                                        <button onClick={() => {
+                                            
+                                            this.hadleNext()
+                                        }} type="submit">Далее</button>
                                     </div>
                                 </Link>
                             </form>

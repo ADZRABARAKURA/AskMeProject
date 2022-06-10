@@ -141,8 +141,6 @@ body {
     margin-bottom: 12px;
 }
 
-.about__text {}
-
 /* =================== */
 
 
@@ -243,16 +241,7 @@ body {
     transform: translateX(-105%);
 }
 
-.leftP__img {}
-
-.leftP__body {}
-
-.body-leftP {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* 
 .body-leftP__nick {
     font-family: 'Roboto';
     font-style: normal;
@@ -261,7 +250,7 @@ body {
     line-height: 28px;
     color: #C0C0C0;
     margin-bottom: 4px;
-}
+} */
 
 .body-leftP__job {
     text-align: center;
@@ -320,52 +309,6 @@ body {
 }
 
 .top-rightP {}
-
-.top-rightP__links {}
-
-.top-rightP__text {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 23px;
-    color: #C0C0C0;
-}
-
-.top-rightP__text::after {
-    content: "";
-    display: block;
-    height: 1px;
-    background: #B00062;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
-.top-rightP__link {
-    display: flex;
-    margin-bottom: 5px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #505050;
-
-}
-
-.top-rightP__link.twitter::before {
-    content: "";
-    display: inline-block;
-    background: url('img/twitch.svg') 0 0 no-repeat;
-    margin-right: 10px;
-    width: 24px;
-    height: 24px;
-}
-
-.top-rightP__link.youtube::before {
-    content: "";
-    display: inline-block;
-    background: url('img/youtube.svg') 0 0 no-repeat;
-    margin-right: 10px;
-    width: 24px;
-    height: 24px;
-}
 
 /* =================== */
 
