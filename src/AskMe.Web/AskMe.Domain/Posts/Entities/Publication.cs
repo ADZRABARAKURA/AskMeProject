@@ -46,10 +46,4 @@ public class Publication
     /// If it costs <c>null</c>, then everyone can view.
     /// </summary>
     public Guid? SubscriptionId { get; set; }
-
-    /// <summary>
-    /// users with which subscription can view this publication. 
-    /// If it costs <c>null</c>, then everyone can view.
-    /// </summary>
-    public Subscription? Subscription { get; set; }
 }

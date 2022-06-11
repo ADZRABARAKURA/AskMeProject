@@ -27,7 +27,7 @@ public class RoleController
     [ProducesResponseType(400)]
     [HttpPut]
     [Authorize(Roles = ExistingRoles.Admin)]
-    public async Task GiveRole(Guid id, string role, CancellationToken cancellationToken)
+    public async Task GiveRole([FromRoute] Guid id, string role, CancellationToken cancellationToken)
     {
         var command = new GiveRoleToUserCommand(id, role);
         await mediator.Send(command, cancellationToken);

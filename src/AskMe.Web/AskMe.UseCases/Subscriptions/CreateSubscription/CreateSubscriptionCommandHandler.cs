@@ -4,6 +4,7 @@ using AskMe.DomainServices.Exceptions;
 using AskMe.Infrastructure.Abstractions.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AskMe.UseCases.Subscriptions.CreateSubscription;
 
@@ -31,11 +32,15 @@ internal class CreateSubscriptionCommandHandler : AsyncRequestHandler<CreateSubs
         {
             throw new ForbiddenException("Only the user can create subscriptions for himself");
         }
+        var childSubscriptions = await appDbContext.Subscriptions
+            .Where(s => s.Price < request.Subscription.Price)
+            .ToListAsync(cancellationToken);
         await appDbContext.Subscriptions.AddAsync(new Subscription()
         {
             UserId = request.Subscription.UserId,
             Title = request.Subscription.Title,
             Price = request.Subscription.Price,
+            ChildSubscriptions = childSubscriptions,
             IsActive = true,
             Description = request.Subscription.Description,
             CreationDate = DateTime.UtcNow

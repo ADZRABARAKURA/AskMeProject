@@ -41,6 +41,11 @@ public class Subscription
     public string? Description { get; set; }
 
     /// <summary>
+    /// Child subscriptions.
+    /// </summary>
+    public IEnumerable<Subscription> ChildSubscriptions;
+
+    /// <summary>
     /// Subscription price.
     /// </summary>
     public SubscriptionPrice Price { get; set; }

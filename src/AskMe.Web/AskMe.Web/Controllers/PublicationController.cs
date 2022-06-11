@@ -57,7 +57,7 @@ public class PublicationController : ControllerBase
     [ProducesResponseType(400)]
     [Authorize]
     [HttpPatch]
-    public async Task Update(UpdatePublicationDto publication, CancellationToken cancellationToken)
+    public async Task Update([FromForm] UpdatePublicationDto publication, CancellationToken cancellationToken)
     {
         var command = new UpdatePublicationCommand(publication);
         await mediator.Send(command, cancellationToken);

@@ -19,9 +19,9 @@ internal class GetSubscriptionsByUserIdCommandHandler : IRequestHandler<GetSubsc
 
     public async Task<IEnumerable<SubscriptionDto>> Handle(GetSubscriptionsByUserIdCommand request, CancellationToken cancellationToken)
     {
-        return await mapper
-            .ProjectTo<SubscriptionDto>(appDbContext.Subscriptions)
-            .Where(entity => entity.UserId == request.Id)
+        var subscriptions = await appDbContext.Subscriptions
+            .Where(entity => entity.UserId == request.Id && entity.IsActive)
             .ToListAsync(cancellationToken);
+        return mapper.Map<IEnumerable<SubscriptionDto>>(subscriptions);
     }
 }

@@ -28,19 +28,9 @@ public class UserProfile
     public string? Passion { get; set; }
 
     /// <summary>
-    /// User subscribers.
-    /// </summary>
-    public List<ApplicationUser> Subscribers { get; init; } = new List<ApplicationUser>();
-
-    /// <summary>
-    /// User subscriptions.
-    /// </summary>
-    public List<Subscription> Subscriptions { get; init; } = new List<Subscription>();
-
-    /// <summary>
     /// References to user content separated by commas.
     /// </summary>
-    public string? References { get; init; }
+    public string? References { get; set; }
 
     /// <summary>
     /// User's goals.

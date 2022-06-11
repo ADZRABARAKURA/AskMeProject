@@ -1,6 +1,6 @@
 ﻿using AskMe.UseCases.Common.Dtos.Post;
 
-namespace AskMe.UseCases.Common.Dtos.UserProfile;
+namespace AskMe.UseCases.Common.Dtos.UserProfiles;
 
 /// <summary>
 /// User profile DTO.
@@ -15,30 +15,35 @@ public record UserProfileDto
     /// <summary>
     /// Count of user subscribers.
     /// </summary>
-    public int Subscribers { get; init; }
+    public int Subscribers { get; set; }
 
     /// <summary>
     /// Price for the cheapest subscription.
     /// </summary>
-    public decimal CheapestSubscriptionPrice { get; init; }
+    public decimal CheapestSubscriptionPrice { get; set; }
 
     /// <summary>
     /// User profile description.
     /// </summary>
-    public string Description { get; init; }
+    public string? Description { get; init; }
 
     /// <summary>
     /// User passion.
     /// </summary>
-    public string Passion { get; init; }
+    public string? Passion { get; init; }
     
     /// <summary>
     /// References to user content.
     /// </summary>
-    public IEnumerable<string> References { get; init; }
+    public IEnumerable<string>? References { get; init; }
 
     /// <summary>
     /// Publications.
     /// </summary>
     public IEnumerable<PublicationDto> Publications { get; set; }
+
+    /// <summary>
+    /// Goals.
+    /// </summary>
+    public IEnumerable<GoalDto> Goals { get; set; }
 }

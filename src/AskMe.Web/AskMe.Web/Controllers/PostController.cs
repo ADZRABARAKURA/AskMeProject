@@ -47,7 +47,7 @@ public class PostController : ControllerBase
     [ProducesResponseType(400)]
     [HttpGet("history/sent/{id}")]
     [Authorize(Roles = ExistingRoles.User)]
-    public async Task<PostForDonaterDto> GetSentPostById(Guid id, CancellationToken cancellationToken)
+    public async Task<PostForDonaterDto> GetSentPostById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var command = new GetSentPostByIdCommand(id);
         return await mediator.Send(command, cancellationToken);
@@ -65,7 +65,7 @@ public class PostController : ControllerBase
     [ProducesResponseType(400)]
     [HttpGet("history/received/{id}")]
     [Authorize(Roles = ExistingRoles.Streamer)]
-    public async Task<PostForStreamerDto> GetRecievedPostById(Guid id, CancellationToken cancellationToken)
+    public async Task<PostForStreamerDto> GetRecievedPostById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var command = new GetRecievedPostByIdCommand(id);
         return await mediator.Send(command, cancellationToken);
@@ -79,7 +79,7 @@ public class PostController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<PostForStreamerDto>), 200)]
     [HttpGet("history/received")]
     [Authorize(Roles = ExistingRoles.Streamer)]
-    public async Task<IEnumerable<PostForStreamerDto>> GetUserPosts( CancellationToken cancellationToken)
+    public async Task<IEnumerable<PostForStreamerDto>> GetUserPosts(CancellationToken cancellationToken)
     {
         var command = new GetPostsRecievedByUserCommand();
         return await mediator.Send(command, cancellationToken);

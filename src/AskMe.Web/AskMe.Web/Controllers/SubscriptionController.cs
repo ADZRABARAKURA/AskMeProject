@@ -33,7 +33,7 @@ public class SubscriptionController : ControllerBase
     [ProducesResponseType(400)]
     [HttpGet("user/{id}")]
     [AllowAnonymous]
-    public async Task<IEnumerable<SubscriptionDto>> GetSubscriptions(Guid id, CancellationToken cancellationToken)
+    public async Task<IEnumerable<SubscriptionDto>> GetSubscriptions([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var command = new GetSubscriptionsByUserIdCommand(id);
         return await mediator.Send(command, cancellationToken);

@@ -1,4 +1,4 @@
-﻿using AskMe.UseCases.Common.Dtos.UserProfile;
+﻿using AskMe.UseCases.Common.Dtos.UserProfiles;
 using MediatR;
 
 namespace AskMe.UseCases.User.GetCurrentUserProfile;

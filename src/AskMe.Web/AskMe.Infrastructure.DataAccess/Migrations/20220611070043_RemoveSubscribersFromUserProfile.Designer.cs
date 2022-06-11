@@ -3,6 +3,7 @@ using System;
 using AskMe.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AskMe.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220611070043_RemoveSubscribersFromUserProfile")]
+    partial class RemoveSubscribersFromUserProfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,7 +154,12 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid?>("UserProfileId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("Subscriptions");
                 });
@@ -403,6 +410,13 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
                         .HasForeignKey("UserProfileId");
                 });
 
+            modelBuilder.Entity("AskMe.Domain.Posts.Entities.Subscription", b =>
+                {
+                    b.HasOne("AskMe.Domain.Users.Entities.UserProfile", null)
+                        .WithMany("Subscriptions")
+                        .HasForeignKey("UserProfileId");
+                });
+
             modelBuilder.Entity("AskMe.Domain.Posts.Entities.UserSubscription", b =>
                 {
                     b.HasOne("AskMe.Domain.Posts.Entities.Subscription", "Subscription")
@@ -468,6 +482,8 @@ namespace AskMe.Infrastructure.DataAccess.Migrations
             modelBuilder.Entity("AskMe.Domain.Users.Entities.UserProfile", b =>
                 {
                     b.Navigation("Goals");
+
+                    b.Navigation("Subscriptions");
                 });
 #pragma warning restore 612, 618
         }

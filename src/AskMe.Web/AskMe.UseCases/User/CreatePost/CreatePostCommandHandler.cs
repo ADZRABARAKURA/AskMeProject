@@ -4,6 +4,7 @@ using AskMe.DomainServices.Exceptions;
 using AskMe.Infrastructure.Abstractions.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AskMe.UseCases.User.CreatePost;
 
@@ -27,6 +28,16 @@ internal class CreatePostCommandHandler : AsyncRequestHandler<CreatePostCommand>
         if (reciever is null)
         {
             throw new NotFoundException("There is no user with such id.");
+        }
+        if (request.Post.GoalId != Guid.Empty)
+        {
+            var goal = await appDbContext.Goals
+                .FirstOrDefaultAsync(g => g.Id == request.Post.GoalId);
+            if (goal == null)
+            {
+                throw new NotFoundException("Goal was not found");
+            }
+            goal.CurrentValue += request.Post.Value;
         }
         var post = new Post()
         {

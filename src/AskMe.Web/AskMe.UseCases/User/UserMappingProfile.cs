@@ -3,7 +3,7 @@ using AskMe.Domain.Users.Entities;
 using AskMe.UseCases.Common.Dtos.Post;
 using AskMe.UseCases.Common.Dtos.Subscriptions;
 using AskMe.UseCases.Common.Dtos.User;
-using AskMe.UseCases.Common.Dtos.UserProfile;
+using AskMe.UseCases.Common.Dtos.UserProfiles;
 using AutoMapper;
 
 namespace AskMe.UseCases.User;
@@ -20,13 +20,10 @@ public class UserMappingProfile : Profile
             .ForMember(dto => dto.IsActive, opt => opt.MapFrom(entity => entity.ExpireAt > DateTime.Now))
             .ForMember(dto => dto.SubscriptionTitle, opt => opt.MapFrom(entity => entity.Subscription.Title));
         CreateMap<UserProfile, UserProfileDto>()
-            .ForMember(dto => dto.CheapestSubscriptionPrice, opt => opt.MapFrom(entity => FindCheapestSubscription(entity.Subscriptions)))
-            .ForMember(dto => dto.Subscribers, opt => opt.MapFrom(entity => entity.Subscribers.Count))
             .ForMember(dto => dto.References, opt => opt.MapFrom(entity => GetReferences(entity.References)));
-        CreateMap<Publication, PublicationDto>()
-            .ForMember(dto => dto.Subscription, opt => opt.MapFrom(entity => entity.Subscription == null 
-                ? null : entity.Subscription.Title));
+        CreateMap<Publication, PublicationDto>();
         CreateMap<ApplicationUser, UserDto>().ReverseMap();
+        CreateMap<Goal, GoalDto>();
     }
 
     private string[] GetReferences(string references)
@@ -46,6 +43,6 @@ public class UserMappingProfile : Profile
             }
         }
 
-        return cheapestSubscription == 1000 ? default : cheapestSubscription;
+        return cheapestSubscription == 1000 ? default : cheapestSubscription * 60;
     }
 }

@@ -34,5 +34,7 @@ internal class DeleteSubscriptionCommandHandler : AsyncRequestHandler<DeleteSubs
         {
             throw new ForbiddenException("Only the user himself can delete his subscriptions");
         }
+        subscription.IsActive = false;
+        await appDbContext.SaveChangesAsync(cancellationToken);
     }
 }

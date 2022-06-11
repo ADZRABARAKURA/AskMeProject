@@ -28,7 +28,7 @@ public record PublicationDto
     /// <summary>
     /// The name of the subscription that is required to view the publication
     /// </summary>
-    public string? Subscription { get; init; }
+    public string? Subscription { get; set; }
 
     /// <summary>
     /// Is post available to current user.
