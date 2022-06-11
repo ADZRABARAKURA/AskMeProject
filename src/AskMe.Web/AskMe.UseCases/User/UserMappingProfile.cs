@@ -24,6 +24,8 @@ public class UserMappingProfile : Profile
         CreateMap<Publication, PublicationDto>();
         CreateMap<ApplicationUser, UserDto>().ReverseMap();
         CreateMap<Goal, GoalDto>();
+        CreateMap<ApplicationUser, SearchUserDto>()
+            .ForMember(dto => dto.Name, opt => opt.MapFrom(entity => entity.UserName));
     }
 
     private string[] GetReferences(string references)
