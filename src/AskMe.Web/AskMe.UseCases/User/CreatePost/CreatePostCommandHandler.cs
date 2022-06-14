@@ -29,7 +29,7 @@ internal class CreatePostCommandHandler : AsyncRequestHandler<CreatePostCommand>
         {
             throw new NotFoundException("There is no user with such id.");
         }
-        if (request.Post.GoalId != Guid.Empty)
+        if (request.Post.GoalId != null)
         {
             var goal = await appDbContext.Goals
                 .FirstOrDefaultAsync(g => g.Id == request.Post.GoalId);
