@@ -1,0 +1,27 @@
+.img {
+    max-width: 600px;
+    max-height: 600px;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.post-title {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #C0C0C0;
+}
+
+.blurred {
+    
+    overflow: hidden;
+}

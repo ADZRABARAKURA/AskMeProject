@@ -4,6 +4,7 @@ import "./profile.css";
 import Links from "../../components/profile/links/links";
 import About from "../../components/profile/about/about";
 import Avatar from "../../components/profile/avatar/avatar";
+import Posts from "../../components/profile/posts/posts";
 
 import main from "../../assets/images/main.jpg";
 import photo from "../../assets/images/photo.jpg";
@@ -22,23 +23,7 @@ export default class Profile extends Component {
                                 <img src="img/dropdown.svg" alt="arrow" />
                             </div>
                         </div>
-                        <div className="post">
-                            <div className="post__title">
-                                <div className="post__text">
-                                    Helping a local business reinvent itself
-                                </div>
-                                <div className="post__date">
-                                    29 января 2021, пт
-                                </div>
-                            </div>
-                            <div className="post__img blurred">
-                                <img src={photo} alt="photo" />
-                                <div className="post__text2">
-                                    <span>Пост только для подписчиков</span>
-                                    <img src="img/lock.svg" alt />
-                                </div>
-                            </div>
-                        </div>
+                        <Posts />
                         <aside className="leftP">
                             <Avatar />
                         </aside>

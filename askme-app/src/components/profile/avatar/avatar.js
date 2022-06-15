@@ -6,7 +6,7 @@ import avatar_img from "../../../assets/images/avatar.jpg";
 
 const data = {
     avatar_img: avatar_img,
-    nickname: "Pro100Ivan",
+    nickname: "Pro100User",
     job: "Разработчик",
     subscribes: "19",
 };
