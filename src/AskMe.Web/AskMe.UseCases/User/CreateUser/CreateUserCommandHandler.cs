@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AskMe.UseCases.User.CreateUser;
 
-public class CreateUserCommandHandler : AsyncRequestHandler<CreateUserCommand>
+public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Unit>
 {
     private const string DefaultRole = "User";
     private readonly ILoggedUserAccessor loggedUserAccessor;
@@ -20,7 +20,7 @@ public class CreateUserCommandHandler : AsyncRequestHandler<CreateUserCommand>
         this.appDbContext = appDbContext;
     }
 
-    protected override async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         if (loggedUserAccessor.GetCurrentUserId() != null)
         {
@@ -35,11 +35,8 @@ public class CreateUserCommandHandler : AsyncRequestHandler<CreateUserCommand>
         await userManager.CreateAsync(user, request.User.Password);
         await userManager.AddToRoleAsync(user, DefaultRole);
         await userManager.AddToRoleAsync(user, "Streamer");
-        var profile = new UserProfile()
-        {
-            UserId = user.Id
-        };
-        await appDbContext.Profiles.AddAsync(profile, cancellationToken);
         await appDbContext.SaveChangesAsync(cancellationToken);
+
+        return Unit.Value;
     }
 }
